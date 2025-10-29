@@ -46,8 +46,3 @@ NovaFlare-Portfolio/
 
 ---
 
-## ⚙️ How to Run Locally
-
-1. **Clone this repository:**
-   ```bash
-   git clone https://github.com/yourusername/NovaFlare-Portfolio.git
