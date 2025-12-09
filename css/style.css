@@ -108,6 +108,40 @@ a {
 }
 
 /* ==============================
+   BUTTON ACTIVE / FOCUS STATES
+   (prevent text disappearing)
+============================== */
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Primary button stays white text on gold when pressed */
+.btn.primary:active {
+  background: #c29b32; /* slightly darker gold */
+  color: #ffffff;
+  transform: translateY(0);  /* avoid extra jump when clicking */
+}
+
+/* Secondary button stays dark text (or white in dark mode) when pressed */
+.btn.secondary:active {
+  background: var(--secondary);
+  color: #ffffff;
+}
+
+/* In dark mode, keep secondary button readable when pressed */
+body.dark-mode .btn.secondary:active {
+  background: #f5f8ff;
+  color: #071223;
+}
+
+
+/* ==============================
    NAVBAR
 ============================== */
 
@@ -579,6 +613,11 @@ section {
   color: var(--primary);
 }
 
+/* Contact form status text */
+#form-status {
+  font-size: 0.95rem;
+}
+
 /* Footer */
 .footer {
   background: var(--muted-bg);
@@ -630,11 +669,48 @@ section {
 body.dark-mode {
   background-color: #071223;
   color: #e8eef6;
+
+  /* Override global text colors for dark mode */
+  --text-dark: #e8eef6;       /* main body text */
+  --text-light: #c4d3f0;      /* subtitles, descriptions */
+  --secondary: #f4f6ff;       /* headings that used to be dark navy */
+  --muted-bg: #050c15;        /* footer / soft backgrounds */
 }
 
+/* Global text brightness in dark mode */
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode .section-subtitle,
+body.dark-mode .about-info,
+body.dark-mode .project-content p,
+body.dark-mode .timeline-content p,
+body.dark-mode .contact-info ul {
+  color: var(--text-light);
+}
+
+/* Make headings clearly visible */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: var(--secondary);
+}
+
+/* Skill cards & project cards text fix */
+body.dark-mode .skill-category,
+body.dark-mode .project-card {
+  color: var(--text-dark);
+}
+
+body.dark-mode .skill-category ul,
+body.dark-mode .project-card p {
+  color: var(--text-light);
+}
+
+
 body.dark-mode header {
-  background: rgba(8,16,28,0.75);
-  border-bottom-color: rgba(255,255,255,0.03);
+  background: rgba(8,16,28,0.85);
+  border-bottom-color: rgba(255,255,255,0.08);
 }
 
 body.dark-mode .logo { color: #f5f8fb; }
@@ -650,6 +726,18 @@ body.dark-mode .hero {
 
 body.dark-mode .hero p { color: #cbd7e6; }
 
+body.dark-mode .about-content p {
+  color: #dbe4f5;
+}
+
+body.dark-mode .about-info {
+  color: #b5c8e0;
+}
+
+body.dark-mode .section-subtitle {
+  color: #b7c7df;
+}
+
 body.dark-mode .skill-category,
 body.dark-mode .project-card,
 body.dark-mode .contact-form,
@@ -657,6 +745,22 @@ body.dark-mode .timeline-content {
   background: #091a2b;
   border-color: #163047;
   color: #dbeafc;
+}
+
+body.dark-mode .project-content p,
+body.dark-mode .timeline-content p {
+  color: #c3d5f0;
+}
+
+body.dark-mode .contact-info ul {
+  color: #c3d5f0;
+}
+
+body.dark-mode .contact-info li a {
+  color: #e8eef6;
+}
+body.dark-mode .contact-info li a:hover {
+  color: var(--primary);
 }
 
 body.dark-mode .about-image img {
@@ -667,6 +771,195 @@ body.dark-mode .about-image img {
 body.dark-mode .btn.primary {
   background: var(--primary);
   color: #071223;
+}
+
+body.dark-mode .footer {
+  background: #050c15;
+  border-top-color: #1a2a3d;
+  color: #9fb0c7;
+}
+
+/* ==============================
+   BLOG PAGE (blog.html)
+============================== */
+
+/* Blog hero reusing hero base */
+.blog-hero {
+  min-height: 40vh;
+  padding: 3rem 1rem;
+}
+.blog-hero .hero-content h1 {
+  font-size: 2.2rem;
+}
+.blog-hero .hero-content p {
+  margin-top: 0.6rem;
+  color: var(--text-light);
+}
+body.dark-mode .blog-hero .hero-content p {
+  color: #c5d4ec;
+}
+
+/* Blog page heading */
+.projects.blog-list .container h2 {
+  text-align: left;
+}
+
+/* Optional badge styling on cards (if added later) */
+.blog-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--secondary);
+  background: rgba(0,0,0,0.04);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.4rem;
+}
+body.dark-mode .blog-badge {
+  background: rgba(255,255,255,0.05);
+  color: #dbeafc;
+}
+
+/* Coming soon card subtle style */
+.project-card.coming-soon .project-content {
+  justify-content: center;
+  text-align: center;
+}
+
+/* ==============================
+   BLOG ARTICLE PAGE
+   (my-cybersecurity-journey.html)
+============================== */
+
+.post-hero {
+  padding: 4rem 0 2rem;
+  background: #f4f6fb;
+}
+body.dark-mode .post-hero {
+  background: #071425;
+}
+
+.post-hero-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+}
+
+.post-hero-text {
+  flex: 1 1 280px;
+}
+
+.post-hero-text h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+body.dark-mode .post-meta {
+  color: #b1c1dd;
+}
+
+.post-hero-image {
+  flex: 0 0 320px;
+  max-width: 380px;
+}
+.post-hero-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(13,27,42,0.18);
+}
+
+/* Article content */
+.post-content {
+  padding: 2.5rem 0 4rem;
+}
+
+.post-body {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+body.dark-mode .post-body {
+  background: #091a2b;
+  border-color: #163047;
+  color: #e3eefe;
+}
+
+.post-body h2 {
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+  font-size: 1.35rem;
+}
+body.dark-mode .post-body h2 {
+  color: #f1f4ff;
+}
+
+.post-body h3 {
+  margin-top: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: var(--secondary);
+  font-size: 1.05rem;
+}
+body.dark-mode .post-body h3 {
+  color: #f1f4ff;
+}
+
+.post-body p {
+  margin-bottom: 0.8rem;
+  color: var(--text-dark);
+}
+body.dark-mode .post-body p {
+  color: #d7e3fa;
+}
+
+.post-body ul {
+  margin: 0.4rem 0 0.9rem 1.1rem;
+  padding-left: 0.5rem;
+  color: var(--text-dark);
+}
+.post-body li {
+  margin-bottom: 0.4rem;
+}
+body.dark-mode .post-body ul {
+  color: #d7e3fa;
+}
+
+/* Links in article */
+.post-body a {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+body.dark-mode .post-body a {
+  color: #f4d572;
+}
+
+/* Back link */
+.post-back-link {
+  max-width: 800px;
+  margin: 1.2rem auto 0;
+}
+.post-back-link a {
+  font-size: 0.95rem;
+  color: var(--secondary);
+}
+.post-back-link a i {
+  margin-right: 0.4rem;
+}
+.post-back-link a:hover {
+  color: var(--primary);
+}
+body.dark-mode .post-back-link a {
+  color: #dbeafc;
 }
 
 /* ==============================
@@ -681,6 +974,14 @@ body.dark-mode .btn.primary {
     flex: 0 0 200px;
   }
   .hero h1 { font-size: 2.2rem; }
+
+  .post-hero-inner {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .post-hero-text h1 {
+    font-size: 1.7rem;
+  }
 }
 
 @media (max-width: 820px) {
@@ -714,6 +1015,10 @@ body.dark-mode .btn.primary {
   }
 
   .typing-text { font-size: 1rem; }
+
+  .post-body {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -722,4 +1027,193 @@ body.dark-mode .btn.primary {
   .hero p { font-size: 0.98rem; }
   .theme-toggle { font-size: 1rem; }
   body > :not(header) { padding-top: 64px; }
+
+  .post-hero {
+    padding: 3rem 0 1.5rem;
+  }
+  .post-hero-image {
+    max-width: 100%;
+  }
 }
+
+/* =========================================
+   DARK MODE — GOLD GLOW ON KEY CARDS
+   (skills, projects, journey, contact, blog)
+========================================= */
+
+body.dark-mode .skill-category,
+body.dark-mode .project-card,
+body.dark-mode .timeline-content,
+body.dark-mode .contact-form,
+body.dark-mode .post-body {
+  border-color: rgba(212, 175, 55, 0.45); /* gold-ish */
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.18),
+    0 0 22px rgba(212, 175, 55, 0.18);
+}
+
+/* Slightly stronger glow on hover to make them feel interactive */
+body.dark-mode .skill-category:hover,
+body.dark-mode .project-card:hover,
+body.dark-mode .timeline-content:hover,
+body.dark-mode .contact-form:hover,
+body.dark-mode .post-body:hover {
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.35),
+    0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+/* Ensure blog article sections never stay hidden by fade-in */
+.post-hero.fade-in,
+.post-content.fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Strong, explicit colors for article text */
+.post-body,
+.post-body p,
+.post-body li {
+  color: var(--text-dark);
+}
+
+body.dark-mode .post-body,
+body.dark-mode .post-body p,
+body.dark-mode .post-body li {
+  color: #d7e3fa;
+}
+
+/* ==========================================
+   BLOG / ARTICLE PAGES DESIGN
+========================================== */
+
+/* Post Hero */
+.post-hero {
+  padding: 6.5rem 0 3rem;  /* was 5rem 0 3rem */
+  background: linear-gradient(135deg, #f8fbff, #eef5ff);
+  text-align: center;
+}
+
+
+.post-hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.post-hero-text h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.post-meta {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-top: 0.5rem;
+}
+
+/* Hero Image */
+.post-hero-image img {
+  width: 420px;
+  max-width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0,0,0,0.06);
+}
+
+/* Article Content Layout */
+.post-content {
+  padding: 3rem 0;
+}
+
+.post-body {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 2.5rem 3rem;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+}
+
+.post-body h2 {
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  color: var(--secondary);
+}
+
+.post-body h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--secondary);
+}
+
+.post-body p,
+.post-body ul {
+  color: var(--text-dark);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.65;
+}
+
+.post-body ul {
+  padding-left: 1.5rem;
+}
+
+.post-body li {
+  margin-bottom: 0.45rem;
+}
+
+/* Back Link */
+.post-back-link {
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto;
+  text-align: left;
+}
+
+.post-back-link a {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.post-back-link a:hover {
+  color: var(--primary);
+}
+
+
+/* ==========================================
+   DARK MODE — BLOG
+========================================== */
+
+body.dark-mode .post-hero {
+  background: linear-gradient(135deg, #091928, #0c2233);
+}
+
+body.dark-mode .post-meta {
+  color: #c9d7e8;
+}
+
+body.dark-mode .post-body {
+  background: #0d1b2a;
+  border-color: #1c2d42;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.42);
+}
+
+body.dark-mode .post-body p,
+body.dark-mode .post-body li,
+body.dark-mode .post-body h2,
+body.dark-mode .post-body h3 {
+  color: #e7f0fd;
+}
+
+body.dark-mode .post-back-link a {
+  color: #e7f0fd;
+}
+
